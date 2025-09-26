@@ -35,6 +35,8 @@ return {
 				},
 			})
 
+			vim.lsp.enable('lua_ls')
+			
 			local map = vim.keymap.set
 			
 			map('n', 'K', vim.lsp.buf.hover, {})
