@@ -1,17 +1,17 @@
 return {
-	'saghen/blink.nvim',
-	event = { 'BufReadPre', 'BufNewFile' },
+	'saghen/blink.cmp',
 	dependencies = { 'rafamadriz/friendly-snippets' },
+	event = { 'BufReadPre', 'BufNewFile' },
 	version = '1.*',
+	lazy = false,
 	opts = {
-		keymap = { preset = 'ender' },
+		keymap = { preset = 'super-tab' },
 		appearance = {
-			nerd_font_varient = 'mono',
+			use_nvim_cmp_as_default = true,
 		},
 		sources = {
 			default = { 'lsp', 'path', 'snippets', 'buffer' },
 		},
 		fuzzy = { implementation = 'prefer_rust_with_warning' },
-	},
-	lazy = false,
+	}
 }

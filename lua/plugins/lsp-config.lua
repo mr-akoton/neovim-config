@@ -1,7 +1,7 @@
 return {
 	{
 		'mason-org/mason-lspconfig.nvim',
-		opt = {
+		opts = {
 			ensure_installed = {
 				'bashls', 'lua_ls', 'cssls',
 				'clangd', 'pyright', 'jdtls',
@@ -18,8 +18,8 @@ return {
 	{
 		'neovim/nvim-lspconfig',
 		event = { 'BufReadPre', 'BufNewFile' },
-		dependencies = { 'Saghen/blink.cmp' },
-		config = function()			
+		dependencies = { 'saghen/blink.cmp' },
+		config = function()
 			vim.lsp.config('lua_ls', {
 				 settings = {
 					Lua = {
@@ -38,7 +38,7 @@ return {
 			vim.lsp.enable('lua_ls')
 			
 			local map = vim.keymap.set
-			
+
 			map('n', 'K', vim.lsp.buf.hover, {})
 			map('n', '<leader>gD', vim.lsp.buf.declaration, { desc = "Declaration" })
 			map('n', '<leader>gd', vim.lsp.buf.definition, { desc = "Definitions" })
@@ -46,4 +46,5 @@ return {
 			map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code Action" })
 		end
 	}
-}
+} 
+
