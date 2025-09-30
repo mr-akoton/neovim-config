@@ -1,5 +1,6 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
+	dependencies = {{ 'habamax/vim-godot', event = 'VimEnter' }},
 	event = { 'BufReadPre', 'BufNewFile' },
 	build = ":TSUpdate",
 	config = function()
@@ -13,10 +14,11 @@ return {
 				'javascript', 'typescript',
 				'html', 'css',
 				'dockerfile',
+				'gdscript', 'godot_resource', 'gdshader',
 			},
 			auto_install = true,
 			highkight = { enable = true },
-			indent = { enable = true }
+			indent = { enable = false }
 		})
 	end,
 }

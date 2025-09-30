@@ -18,27 +18,35 @@ return {
 	{
 		'neovim/nvim-lspconfig',
 		event = { 'BufReadPre', 'BufNewFile' },
-		dependencies = { 'saghen/blink.cmp' },
+		dependencies = {
+			'saghen/blink.cmp',
+			'WhoIsSethDaniel/mason-tool-installer.nvim',
+			{ 'j-hui/fidget.nvim', opts = { } }
+		},
 		config = function()
-			vim.lsp.config('lua_ls', {
-				 settings = {
+			local servers = {
+				bashls = {},
+				cssls = {},
+				clangd = {},
+				pyright = {},
+				jdtls = {},
+				dockerls = {},
+				autotools_ls = {},
+				gdscript = {},
+				lua_ls = {
 					Lua = {
-						runtime = { version = 'LuaJIT' },
-						diagnostics = {
-							globals = { 'vim', 'require' },
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-						},
+						workspace = { checkThirdParty = false },
 						telemetry = { enable = false },
 					},
 				},
-			})
+			}
 
-			vim.lsp.enable('lua_ls')
-			
+			for server, opt in pairs(servers) do
+				vim.lsp.config(server, opt)
+				vim.lsp.enable(server)
+			end
+
 			local map = vim.keymap.set
-
 			map('n', 'K', vim.lsp.buf.hover, {})
 			map('n', '<leader>gD', vim.lsp.buf.declaration, { desc = "Declaration" })
 			map('n', '<leader>gd', vim.lsp.buf.definition, { desc = "Definitions" })
@@ -46,5 +54,4 @@ return {
 			map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code Action" })
 		end
 	}
-} 
-
+}
