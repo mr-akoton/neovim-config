@@ -23,10 +23,3 @@ require("lazy").setup({
 	defaults = { lazy = false, },
 	checker = { enabled = true },
 })
-
-vim.diagnostic.config({
-	virtual_text = true,
-	virtual_lines = true,
-	underline = true,
-	update_in_insert = false,
-})

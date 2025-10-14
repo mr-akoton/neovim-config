@@ -33,7 +33,7 @@ map('n', '<leader>bx', 'BufferClose<CR>', { desc = 'Close tab', noremap = true }
 map('n', '<leader>bp', 'BufferPin<CR>', { desc = 'Pin tab', noremap = true })
 
 map('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = "Open file explorer" })
-
+map('n', 'K', vim.lsp.buf.hover, { buffer = 0, desc = "Show documentation" })
 
 -- Visual Mode remap
 map('v', '<', '<gv', { desc = "Indenting to left", silent = true, noremap = true })

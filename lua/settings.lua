@@ -9,7 +9,6 @@ vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 vim.opt.showmode = false
 
-
 -- Format settings
 vim.opt.autoindent = true
 vim.opt.wrap = true
@@ -39,3 +38,5 @@ vim.opt.softtabstop = 4
 vim.schedule( function()
 	vim.opt.clipboard = 'unnamedplus'
 end )
+
+
