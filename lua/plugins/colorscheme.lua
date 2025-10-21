@@ -1,23 +1,12 @@
 return {
-	'Shatur/neovim-ayu',
-	lazy = false,
+	"ellisonleao/gruvbox.nvim",
 	priority = 1000,
 	config = function()
-		require('ayu').setup({
-			mirage = true,
-			terminal = true,
-			overrides = {
-				Normal = { bg = "None" },
-				NormalFloat = { bg = "none" },
-				ColorColumn = { bg = "None" },
-				SignColumn = { bg = "None" },
-				Folded = { bg = "None" },
-				FoldColumn = { bg = "None" },
-				CursorLine = { bg = "None" },
-				CursorColumn = { bg = "None" },
-				VertSplit = { bg = "None" },
-			},
+		require("gruvbox").setup({
+			terminal_colors = true, -- add neovim terminal colors
+			contrast = "hard", -- can be "hard", "soft" or empty string
+			transparent_mode = true,
 		})
-		vim.cmd.colorscheme('ayu')
+		vim.cmd.colorscheme("gruvbox")
 	end,
 }
