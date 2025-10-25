@@ -1,24 +1,23 @@
-return {
-	'nvim-treesitter/nvim-treesitter',
-	dependencies = {{ 'habamax/vim-godot', event = 'VimEnter' }},
-	event = { 'BufReadPre', 'BufNewFile' },
-	build = ":TSUpdate",
-	config = function()
-		local config = require('nvim-treesitter.configs')
-		config.setup({
-			ensure_installed = {
-				'c', 'cpp',
-				'lua',
-				'vim', 'bash',
-				'python', 'java',
-				'javascript', 'typescript',
-				'html', 'css',
-				'dockerfile',
-				'gdscript', 'godot_resource', 'gdshader',
-			},
-			auto_install = true,
-			highkight = { enable = true },
-			indent = { enable = false }
-		})
-	end,
-}
+-- Packages ----------------------------------------------------------------- --
+vim.pack.add({
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+})
+
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		'c',
+		'cpp',
+		'css',
+		'html',
+		'javascript',
+		'lua',
+		'markdown',
+		'python',
+		'typescript',
+		'tsx',
+		'vim',
+	},
+	auto_install = true,
+	highlight = { enable = true }
+})

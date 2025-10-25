@@ -1,52 +1,55 @@
 local map = vim.keymap.set
 
--- Map Leader
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- Invert j and k direction
-map({ 'n', 'v', 'o' }, 'j', 'k', { noremap = true })
-map({ 'n', 'v', 'o' }, 'k', 'j', { noremap = true })
+-- Map leader
+vim.g.mapleader = " "
 
 
--- Normal Mode remap
--- map('n', '<leader>pv', vim.cmd.Ex, { desc = "Open default file explorer" })
-map('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+-- keymap('n', '<leader>so', '<CMD>Ex<CR>', { desc = "File Explorer" })
+map('n', '-', '<CMD>Oil<CR>', { desc = "Open parent directory" })
 
-map('n', '<leader>wj', '<C-w>h', { desc = "Move focus to the left window" })
-map('n', '<leader>wl', '<C-w>l', { desc = "Move focus to the right window"})
-map('n', '<leader>wi', '<C-w>j', { desc = "Move focus to the upper window" })
-map('n', '<leader>wk', '<C-w>k', { desc = "Move focus to the lower window" })
+map('n', '<leader>w', '<CMD>w!<CR>', { desc = "Save current file", silent = true })
+map('n', '<leader>q', '<CMD>q<CR>', { desc = "Quit Neovim", silent = true })
 
-map('n', '<leader>w', ':w<CR>', { desc = "Save file", remap = true })
-map('n', '<leader>q', ':q<CR>', { desc = "Quit Neovim", remap = true })
-map('n', '<C-a>', 'gg<S-v>G', { desc = "Select all", noremap = true })
+map('n', '<leader>|', '<CMD>vsplit<CR>', { desc = "Split window verticaly", silent = true })
+map('n', '<leader>_', '<CMD>split<CR>', { desc = "Split window horizontaly", silent = true })
 
-map('n', 'te', ':tabedit<CR>', { desc = "New tab" })
+map('n', '<A-j>', '<CMD>move .+1<CR>==', { desc = "Move line down", silent = true })
+map('n', '<A-k>', '<CMD>move .-2<CR>==', { desc = "Move line up", silent = true })
+map('v', '<A-j>', '<CMD>move \'>+1<CR>gv=gv', { desc = "Move selected lines down", silent = true })
+map('v', '<A-k>', '<CMD>move \'<-2<CR>gv=gv', { desc = "Move selected lines up", silent = true })
 
-map('n', '<leader>sh', ':split<Return><C-w>w', { desc = "Split horizontaly", noremap = true })
-map('n', '<leader>sv', ':vsplit<Return><C-w>w', { desc = "Split Verticaly", noremap = true })
+map('n', '<leader>pu', '<CMD>lua vim.pack.update()<CR>', { desc = "Pack update" })
 
-map('n', '<Tab>', ':BufferNext<CR>', { desc = "Move to next tab", noremap = true })
-map('n', '<S-Tab>', ':BufferPrevious<CR>', { desc = "Move to previous tab", noremap = true })
-map('n', '<leader>bx', 'BufferClose<CR>', { desc = 'Close tab', noremap = true })
-map('n', '<leader>bp', 'BufferPin<CR>', { desc = 'Pin tab', noremap = true })
+-- Search and replace word
+map('n', '<leader>rw', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = "Replace word under cursor (file)" })
+map('n', '<leader>rW', [[:%s/\V<C-r><C-a>//g<Left><Left>]], { desc = "Replace WORD under cursor (file)" })
+map('x', '<leader>rw', [["hy:%s/<C-r>h//g<Left><Left>]], { desc = "Replace selection (file)" })
+map('n', '<leader>rc', [[:%s/\<<C-r><C-w>\>//gc<Left><Left><Left>]], { desc = "Replace word with confirmation" })
+map('n', '<Esc><Esc>', '<cmd>nohlsearch<CR>', { desc = "Clear search highlight" })
+map('n', '<leader>rp', function()
+	local word = vim.fn.expand('<cword>')
+	local replace = vim.fn.input('Replace "' .. word .. '" with: ')
+	if replace ~= '' then
+		vim.cmd('grep -r "' .. word .. '" .')
+		vim.cmd('cfdo %s/' .. word .. '/' .. replace .. '/g | update')
+	end
+end, { desc = "Replace in project (quickfix)" })
 
-map('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = "Open file explorer" })
-map('n', 'K', vim.lsp.buf.hover, { buffer = 0, desc = "Show documentation" })
+-- Buffer navigation
+map('n', '<leader>bn', '<cmd>bnext<CR>', { desc = "Next buffer" })
+map('n', '<leader>bp', '<cmd>bprevious<CR>', { desc = "Previous buffer" })
+map('n', '<leader>bd', '<cmd>bdelete<CR>', { desc = "Delete buffer" })
+map('n', '<leader>bD', '<cmd>bdelete!<CR>', { desc = "Force delete buffer" })
+map('n', '<leader>bl', '<cmd>buffers<CR>', { desc = "List buffers" })
 
--- Visual Mode remap
-map('v', '<', '<gv', { desc = "Indenting to left", silent = true, noremap = true })
-map('v', '>', '>gv', { desc = "Indenting to right", silent = true, noremap = true })
-
-
--- Disable Keymap
-map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-map('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-map('n', '<up>', '<cmd>echo "Use j to move!!"<CR>')
-map('n', '<down>', '<cmd>echo "Use k to move!!"<CR>')
-
-
---- Utilitary shortcut
-map('v', '<leader>rl', ':s/\\V//g<Left><Left>', { desc = 'Replace occurence in current line', remap = false })
-map('v', '<leader>rf', ':%s/\\V//g<Left><Left>', { desc = 'Replace occurence in entire file', remap = false })
+-- Editor navigation and helpers
+map('n', '<leader>d', 'yyp', { desc = "Duplicate line" })
+map('v', '<leader>d', 'y`>p', { desc = "Duplicate selection" })
+map('n', 'gJ', 'J', { desc = "Join lines with space" })
+map('n', 'J', 'mzJ`z', { desc = "Join lines, keep cursor" })
+map('v', '<', '<gv', { desc = "Indent left" })
+map('v', '>', '>gv', { desc = "Indent right" })
+map({'n', 'v'}, 'H', '^', { desc = "Start of line" })
+map({'n', 'v'}, 'L', '$', { desc = "End of line" })
+map('x', '<leader>p', '"_dP', { desc = "Paste without yanking" })
+map({'n', 'v'}, '<leader>x', '"_d', { desc = "Delete without yanking" })
