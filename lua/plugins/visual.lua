@@ -19,8 +19,9 @@ require("tiny-inline-diagnostic").setup({
 local comment_divider = require("comment-divider")
 
 comment_divider.setup({
-	c = { "/*", "*/" },
-	lua = { "--", "--" }
+	c = { "/*", "*/" }, cpp = { "/*", "*/" },
+	h = { "/*", "*/" }, hpp = { "/*", "*/" },
+	lua = { "--", "--" },
 })
 
 local function create_section_divider()
