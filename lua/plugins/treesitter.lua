@@ -1,10 +1,13 @@
--- Packages ----------------------------------------------------------------- --
+-- -------------------------------- Packages -------------------------------- --
 vim.pack.add({
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
 })
 
 
 require("nvim-treesitter.configs").setup({
+	modules = {},
+	sync_install = true,
+	ignore_install = {},
 	ensure_installed = {
 		'c',
 		'cpp',

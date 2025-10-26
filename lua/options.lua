@@ -21,4 +21,3 @@ opt.winborder = "rounded"
 opt.hlsearch = false
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-

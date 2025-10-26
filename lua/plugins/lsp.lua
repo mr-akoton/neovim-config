@@ -1,4 +1,4 @@
--- Packages ----------------------------------------------------------------- --
+-- -------------------------------- Packages -------------------------------- --
 vim.pack.add({
 	{ src = 'https://github.com/neovim/nvim-lspconfig' },
 	{ src = 'https://github.com/mason-org/mason.nvim' },
@@ -7,7 +7,7 @@ vim.pack.add({
 })
 
 
--- LSP Configuration -------------------------------------------------------- --
+-- --------------------------- LSP Configuration ---------------------------- --
 require("mason").setup()
 require("mason-lspconfig").setup()
 
@@ -19,7 +19,7 @@ require("mason-tool-installer").setup({
 	}
 })
 
--- Language Configuration --------------------------------------------------- --
+-- ------------------------- Language Configuration ------------------------- --
 vim.lsp.config('lua_ls', {
 	settings = {
 		Lua = {
