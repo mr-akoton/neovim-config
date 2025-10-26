@@ -1,6 +1,7 @@
 require("plugins.lsp")
 require("plugins.completion")
 require("plugins.mini")
+require("plugins.terminal")
 require("plugins.treesitter")
 require("plugins.navigation")
 require("plugins.visual")
